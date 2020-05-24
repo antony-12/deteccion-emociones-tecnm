@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Deteccion Emociones</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+ 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  
+  
+
+</head>
+
+<body>
+
+    <style>
+        .nn {
+            padding-left: 80%;
+            height: 100px;
+            width: 200px;
+    
+        }
+        </style>
+
+<div id="probando"></div>
+
+
+<img src="{{url_for('static', filename='img/1.jpg')}}" class="nn" id="e1">
+
+<button type="button" class="button" onclick="init()">Start</button>
+<div id="webcam-container"></div>
+<div id="label-container"></div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+<script type="text/javascript">
+   
+
+// el enlace a su modelo que esta en el drive
+
+   
+
+    let model, webcam, labelContainer, maxPredictions;
+
+
+// Carga del modelo de imagen 
+    async function init() {
+        const modelURL = "{{url_for('static', filename='model/model.json')}}";
+        const metadataURL = "{{url_for('static', filename='model/metadata.json')}}";
+
+ 
+// carga el modelo y los metadatos
+        // Encontramos que con tmImage.loadFromFiles () en la API para admitir archivos de un selector de archivos
+        // o archivos de tu disco duro local
+        // Nota: la biblioteca de pose agrega el objeto "tmImage" a su ventana (window.tmImage)   
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const flip = true; // si voltear la cámara web
+        webcam = new tmImage.Webcam(200, 200, flip); // ancho, alto, volteo
+        await webcam.setup(); // solicitar acceso a la cámara webm
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+// agrega elementos al DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { //etiquetas de clase
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
+
+    async function loop() {
+        webcam.update(); // actualiza el marco de la cámara web
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
+
+    // run the webcam image through the image model
+    async function predict() {
+        // predict can take in an image, video or canvas html element
+        const prediction = await model.predict(webcam.canvas);
+        for (let i = 0; i < maxPredictions; i++) {
+            const classPrediction =
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+        }
+    }
+</script>
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<div id="preloader"></div>
+
+<!-- JavaScript Libraries -->
+<script src="{{url_for('static', filename='lib/jquery/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/jquery/jquery-migrate.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/popper/popper.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/easing/easing.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/owlcarousel/owl.carousel.min.js')}}"></script>
+<script src="{{url_for('static', filename='lib/scrollreveal/scrollreveal.min.js')}}"></script>
+<!-- Contact Form JavaScript File -->
+<script src="{{url_for('static', filename='contactform/contactform.js')}}"></script>
+
+<!-- Template Main Javascript File -->
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+</html>
