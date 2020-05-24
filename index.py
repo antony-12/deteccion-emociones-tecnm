@@ -25,10 +25,15 @@ def original():
     return render_template('original.html')
 
 # Main
-@app.route('/document')
-def documentt():
+@app.route('/cargando')
+def cargando():
     
-    return render_template('document.html')
+    return render_template('cargando.html')
+
+@app.route('/carga2')
+def carga2():
+    
+    return render_template('carga2.html')
 
 
 

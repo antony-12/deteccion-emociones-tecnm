@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+
+
+
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{url_for('static', filename='lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{url_for('static', filename='lib/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/animate/animate.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+  
+
+
+
+  
+  <link rel="stylesheet" href="{{url_for('static', filename='css/icons.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/grid.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/modal.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+  <title>Vista previa de imágenes</title>
+</head>
+
+<body>
+
+  <div class="click-closed"></div>
+
+  <!--/ Nav Star /-->
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="#">Deteccion<span class="color-b">Emociones</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
+        data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+  
+      </div>
+      <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
+        data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+  <!--/ Nav End /-->
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+
+  <form>
+    <p>Datos</p>
+
+
+    <style>
+      .bun {
+          background-color: #4CAF50;
+          border: none;
+          color: white;
+          width: 100%;
+          height: 50px;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: btn-block;
+          font-size: 18px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+      .bun:hover{
+   background-color: rgb(84, 206, 115);
+   color: rgba(234, 255, 232, 0.986);
+      }
+      .bun2 {
+          background-color: rgb(27, 116, 231);
+          border: none;
+          color: white;
+          width: 100%;
+          height: 50px;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: btn-block;
+          font-size: 20px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+      .bun2:hover{
+   background-color: rgb(0, 132, 255);
+   color: rgba(184, 235, 255, 0.87);
+}
+</style>
+    <button type="submit" class="bun">Clic para Predecir</button>
+   
+
+  
+
+
+  <div class="modal">
+    <div class="modal-main">
+      <div class="row">
+        <div class="c-3-lg c-3-md c-1-sm close-modal"></div>
+        <div class="c-6-lg c-6-md c-10-sm c-12-xs close-modal">
+          <div class="modal-card" id="loading">
+            <div class="preloader"></div>
+            <span class="tag">Cargando...</span>
+          </div>
+          <div class="modal-card" id="Message">
+            <span class="tag"></span>
+          </div>
+        </div>
+        <div class="c-3-lg c-3-md c-1-sm close-modal"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <main>
+    <div class="container">
+      <section id="Images" class="images-cards">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
+              <div class="add-new-photo first" id="add-photo">
+                <span><i class="icon-camera"></i></span>
+              </div>
+              <input type="file" multiple id="add-new-photo" name="images[]">
+            </div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+  
+  <button type="submit" class="bun2">Guardar Resultado</button>
+ 
+
+</form>
+
+
+
+
+  <!-- Bootstrap y jQuery -->
+
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+  <!--  /Bootstrap y jQuery -->
+
+  <!-- JavaScript Libraries -->
+  <script src="{{url_for('static', filename='lib/jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/jquery/jquery-migrate.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/popper/popper.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/easing/easing.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/owlcarousel/owl.carousel.min.js')}}"></script>
+  <script src="{{url_for('static', filename='lib/scrollreveal/scrollreveal.min.js')}}"></script>
+
+
+  <!-- Contact Form JavaScript File -->
+
+
+
+  <!-- Template Main Javascript File -->
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+  <script src="{{url_for('static', filename='js/carga.js')}}"></script>
+  <script src="{{url_for('static', filename='js/modal.js')}}"></script>
+  <script src="{{url_for('static', filename='js/functions.js')}}"></script>
+  <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+
+</html>
