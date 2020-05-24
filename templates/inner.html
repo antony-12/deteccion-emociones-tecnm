@@ -1,0 +1,29 @@
+
+   <style>
+    .nn {
+        padding-left: 80%;
+        height: 100px;
+        width: 200px;
+
+    }
+    </style>
+
+
+<div id="probando"></div>
+
+<img src="{{url_for('static', filename='img/1.jpg')}}" class="nn" id="e1">
+
+<!--Además de ser una propiedad de lectura que permite obtener un string con lo que hay dentro de un div, también permite escribir dentro y 
+    cambiar su contenido. Por ejemplo, si tenemos un div como el siguiente:-->
+
+<div id="caja"><p>Hola, esto es un div que se llama caja</p></div>
+
+<script>
+//Podemos utilizar innerHTML para recoger el contenido del div y meterlo en una variable-->
+var textodeldiv = document.getElementById("caja").innerHTML;
+
+//Pero también podemos modificar el contenido de ese div-->
+
+document.getElementById("caja").innerHTML = "<p>Creo que ya quedo</p>";
+
+</script>

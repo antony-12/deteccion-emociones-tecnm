@@ -35,6 +35,10 @@ def carga2():
     
     return render_template('carga2.html')
 
+@app.route('/inner')
+def inner():
+    
+    return render_template('inner.html')
 
 
 # starting the app
